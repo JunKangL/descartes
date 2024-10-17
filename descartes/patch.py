@@ -60,11 +60,11 @@ def PolygonPath(polygon):
                 "A polygon or multi-polygon representation is required")
 
     vertices = concatenate([
-        concatenate([asarray(t.exterior)[:, :2]] +
+        concatenate([asarray(t.exterior.coords)[:, :2]] +
                     [asarray(r)[:, :2] for r in t.interiors])
         for t in polygon])
     codes = concatenate([
-        concatenate([coding(t.exterior)] +
+        concatenate([coding(t.exterior.coords)] +
                     [coding(r) for r in t.interiors]) for t in polygon])
 
     return Path(vertices, codes)
